@@ -1,0 +1,14 @@
+{% extends "templates/user_data_template.html" %}
+
+{% block imports %}
+{% load static %}
+<script type="text/javascript" src="{% static 'urban_development/js/login_page.js' %}"></script>
+{% endblock %}
+
+{% block form-error %}
+<div class="{% if form.errors %}message error{% else %}hidden-row{% endif %}" id="form-error">
+    {% if form.errors %}
+    Invalid username or password.
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+image: python:3.9.4
+
+before_script:
+  - python --version
+  - apt-get update && apt-get install -y python3-opencv
+  - pip install -r requirements.txt
+
+stages:
+  - static analysis
+  - test
+
+flake8:
+  stage: static analysis
+  allow_failure: false
+  script:
+  - flake8 src
+
+pylint:
+  stage: static analysis
+  allow_failure: false
+  script:
+  - pylint src
+
+
+unit_test:
+  stage: test
+  allow_failure: false
+  script:
+  - cd src
+  - python manage.py test api
